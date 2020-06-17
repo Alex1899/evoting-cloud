@@ -1,13 +1,16 @@
 <template>
   <div class="posts">
-    <h1>2020 Presidential Election</h1>
-    <h3>If you are a registered voter, enter your voterId below</h3>
+    <h1>2020 წლის არჩევნები</h1>
+    <h3>თუ რეგისტრირებული ხართ საარჩევნო სისტემაში, შეიყვანეთ საიდენტიფიკაციო კოდი</h3>
     <!--span><b>{{ response }}</b></span><br /-->
     <form v-on:submit="validateVoter">
-      <input type="text" v-model="loginData.voterId" placeholder="Enter VoterId">
+      <input type="text" v-model="loginData.voterId" placeholder="საიდენტიფიკაციო კოდი">
+      <br>
       <br>
 
-      <input type="submit" value="Login">
+      <input type="submit" value="შესვლა">
+      <span>&nbsp;</span>
+      <router-link to="/registerPage"><input type="button" value="რეგისტრაცია"></router-link>
       <br>
       <br>
       <span v-if="loginReponse">
@@ -15,25 +18,7 @@
       </span>
       <br>
     </form>
-
-    <br>
-    <h3>Otherwise, fill out the form below to register!</h3>
-    <form v-on:submit="registerVoter">
-      <input type="text" v-model="registerData.voterId" placeholder="Enter Drivers License">
-      <br>
-      <input type="text" v-model="registerData.registrarId" placeholder="Enter Registrar ID">
-      <br>
-      <input type="text" v-model="registerData.firstName" placeholder="Enter first name">
-      <br>
-      <input type="text" v-model="registerData.lastName" placeholder="Enter last name">
-      <br>
-      <input type="submit" value="Register">
-    </form>
-    <br>
-    <span v-if="registerReponse">
-      <b>{{ registerReponse.data }}</b>
-    </span>
-    <br>
+    
     <vue-instant-loading-spinner id='loader' ref="Spinner"></vue-instant-loading-spinner>
   </div>
 </template>
@@ -60,21 +45,6 @@ export default {
     VueInstantLoadingSpinner
   },
   methods: {
-    async registerVoter() {
-
-      await this.runSpinner();
-      const apiResponse = await PostsService.registerVoter(
-        this.registerData.voterId,
-        this.registerData.registrarId,
-        this.registerData.firstName,
-        this.registerData.lastName
-      );
-
-      console.log(apiResponse);
-      this.registerReponse = apiResponse;
-      await this.hideSpinner();
-    },
-
     async validateVoter() {
       await this.runSpinner();
 
@@ -104,6 +74,7 @@ export default {
         await this.hideSpinner();
       }
     },
+
     async runSpinner() {
       this.$refs.Spinner.show();
     },

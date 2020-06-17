@@ -19,10 +19,9 @@ export default {
       selected: selected
     }) 
   },
-  registerVoter(voterId, registrarId, firstName, lastName) {
+  registerVoter(voterId, firstName, lastName) {
     return Api().post('registerVoter', {
       voterId: voterId,
-      registrarId: registrarId,
       firstName: firstName,
       lastName: lastName,
       

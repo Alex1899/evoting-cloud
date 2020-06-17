@@ -158,15 +158,12 @@ exports.invoke = async function (networkObj, isQuery, func, args) {
   }
 };
 
-exports.registerVoter = async function (voterId, registrarId, firstName, lastName) {
-
-  console.log('registrarId');
-  console.log(registrarId);
-
+exports.registerVoter = async function (voterId, firstName, lastName) {
+  
   console.log('voterId ');
   console.log(voterId);
 
-  if (!registrarId || !voterId || !firstName || !lastName) {
+  if (!voterId || !firstName || !lastName) {
     let response = {};
     response.error = 'Error! You need to fill all fields before you can register!';
     return response;
@@ -186,7 +183,7 @@ exports.registerVoter = async function (voterId, registrarId, firstName, lastNam
       let response = {};
       console.log(`An identity for the user ${voterId} already exists in the wallet`);
       response.error = `Error! An identity for the user ${voterId} already exists in the wallet. Please enter
-        a different license number.`;
+        a different ID number.`;
       return response;
     }
 
