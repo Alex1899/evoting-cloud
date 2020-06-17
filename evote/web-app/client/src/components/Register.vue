@@ -32,7 +32,6 @@ export default {
   name: "response",
   data() {
     return {
-      loginData: {},
       registerData: {},
       registerReponse: {
         data: ""
@@ -54,9 +53,10 @@ export default {
         this.registerData.firstName,
         this.registerData.lastName
       );
-
+      console.log('testing beloow!!!!');
       console.log(apiResponse);
-      this.registerReponse = apiResponse;
+      
+      this.registerReponse.data = apiResponse.data;
       await this.hideSpinner();
     },
 

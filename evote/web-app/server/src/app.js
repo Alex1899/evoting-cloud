@@ -74,17 +74,9 @@ app.post('/queryWithQueryString', async (req, res) => {
 });
 
 //get voter info, create voter object, and update state with their voterId
-app.post('/registerVoter', async (req, res) => {
-  console.log('req.body: ');
-  console.log(req.body);
-  console.log('testing: firstname: ');
-  console.log(req.body.firstName);
-  console.log('testing: lastname: ');
-  console.log(req.body.lastName);
-  
+app.post('/registerVoter', async (req, res) => {  
 
   let voterId = req.body.voterId;
-
 
   //first create the identity for the voter and add to wallet
   let response = await network.registerVoter(voterId, req.body.firstName, req.body.lastName);
@@ -117,9 +109,10 @@ app.post('/registerVoter', async (req, res) => {
     } else {
 
       console.log('after network.invoke ');
-      let parsedResponse = JSON.parse(invokeResponse);
-      parsedResponse += '. Use voterId to login above.';
-      res.send(parsedResponse);
+      //let parsedResponse = JSON.parse(invokeResponse);
+      //parsedResponse += '. Use voterId to login above.';
+      
+      res.send(response);
 
     }
 

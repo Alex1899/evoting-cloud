@@ -1,5 +1,5 @@
 <template>
-  <div class="posts">
+  <div class="posts" >
     <h1>2020 წლის არჩევნები</h1>
     <h3>თუ რეგისტრირებული ხართ საარჩევნო სისტემაში, შეიყვანეთ საიდენტიფიკაციო კოდი</h3>
     <!--span><b>{{ response }}</b></span><br /-->
@@ -50,7 +50,7 @@ export default {
 
       if (!this.loginData.voterId) {
         console.log("!thislogin");
-        let response = 'Please enter a VoterId';
+        let response = 'გთხოვთ შეიყვანეთ საიდენტიფიკაციო კოდი';
         this.loginReponse.data = response;
         await this.hideSpinner();
       } else {

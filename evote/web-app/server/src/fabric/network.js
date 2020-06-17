@@ -41,13 +41,13 @@ exports.connectToNetwork = async function (userName) {
     // userName = 'V123412';
     const userExists = await wallet.exists(userName);
     if (!userExists) {
-      console.log('An identity for the user ' + userName + ' does not exist in the wallet');
+      console.log('მომხმარებელი ' + userName + ' არ მოიძებნა საფულეში');
       console.log('Run the registerUser.js application before retrying');
       let response = {};
-      response.error = 'An identity for the user ' + userName + ' does not exist in the wallet. Register ' + userName + ' first';
-      return response;
-    }
-
+      response.error = 'მომხმარებელი ' + userName + ' არ მოიძებნა საფულეში. გთხოვთ დარეგისტრირდეთ!';
+      return response.error;
+    } 
+ 
     console.log('before gateway.connect: ');
 
     await gateway.connect(ccp, { wallet, identity: userName, discovery: gatewayDiscovery });
@@ -165,7 +165,7 @@ exports.registerVoter = async function (voterId, firstName, lastName) {
 
   if (!voterId || !firstName || !lastName) {
     let response = {};
-    response.error = 'Error! You need to fill all fields before you can register!';
+    response.error = 'შეცდომა! გთხოვთ ყველა მონაცემები შეიყვანოთ დასარეგისტრირებლად!';
     return response;
   }
 
@@ -182,8 +182,7 @@ exports.registerVoter = async function (voterId, firstName, lastName) {
     if (userExists) {
       let response = {};
       console.log(`An identity for the user ${voterId} already exists in the wallet`);
-      response.error = `Error! An identity for the user ${voterId} already exists in the wallet. Please enter
-        a different ID number.`;
+      response.error = `შეცდომა! მომხმარებელი პირადი ნომრით ${voterId} უკვე არის საფულეში.`;
       return response;
     }
 
@@ -193,8 +192,7 @@ exports.registerVoter = async function (voterId, firstName, lastName) {
       console.log(`An identity for the admin user ${appAdmin} does not exist in the wallet`);
       console.log('Run the enrollAdmin.js application before retrying');
       let response = {};
-      response.error = `An identity for the admin user ${appAdmin} does not exist in the wallet. 
-        Run the enrollAdmin.js application before retrying`;
+      response.error = `შეცდომა! მომხმარებელი ${appAdmin} არ არის საფულეში. გააქტიურეთ enrollAdmin.js სანამ ხელმეორედ სცდით.`;
       return response;
     }
 
@@ -205,16 +203,16 @@ exports.registerVoter = async function (voterId, firstName, lastName) {
     // Get the CA client object from the gateway for interacting with the CA.
     const ca = gateway.getClient().getCertificateAuthority();
     const adminIdentity = gateway.getCurrentIdentity();
+  
     console.log(`AdminIdentity: + ${adminIdentity}`);
 
     // Register the user, enroll the user, and import the new identity into the wallet.
     const secret = await ca.register({ affiliation: '', enrollmentID: voterId, role: 'client' }, adminIdentity);
-
     const enrollment = await ca.enroll({ enrollmentID: voterId, enrollmentSecret: secret });
     const userIdentity = await X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
     await wallet.import(voterId, userIdentity);
     console.log(`Successfully registered voter ${firstName} ${lastName}. Use voterId ${voterId} to login above.`);
-    let response = `Successfully registered voter ${firstName} ${lastName}. Use voterId ${voterId} to login above.`;
+    let response = `რეგისტრაციამ წარმატებით გაიარა! მომხმარებელი ${firstName} ${lastName} დარეგისტრირდა სისტემაში.`;
     return response;
   } catch (error) {
     console.error(`Failed to register user + ${voterId} + : ${error}`);

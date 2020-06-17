@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <h1>Cast Ballot</h1>
+    <h1>გააკეთეთ არჩევანი ქვემოთ მოცემული კანდიდატებიდან</h1>
     <input type="radio" id="one" value="Republican" v-model="picked">
     <label for="one">Donald Trump (Republican)</label>
     <br>
@@ -18,7 +18,7 @@
     <br>
     <br>
     <span v-if="picked">
-      Picked:
+      არჩევანი:
       <b>{{ picked }}</b>
     </span>
     <br>
@@ -27,9 +27,10 @@
     <form v-on:submit="castBallot">
       <!-- <input type="text" value="2sww593dc034wb2twdk91r" v-model="input.electionId"  >
       <br>-->
-      <input type="text" v-model="input.voterId" placeholder="Enter VoterId">
+      <input type="text" v-model="input.voterId" placeholder="საიდენტიფიკაციო კოდი">
       <br>
-      <input type="submit" value="Cast Vote">
+      <br>
+      <input type="submit" value="ხმის მიცემა">
       <br>
     </form>
 
@@ -78,14 +79,14 @@ export default {
       if (this.picked === null ) {
         console.log('this.picked === null')
 
-        let response = "You have to pick a party to vote for!";
+        let response = "გტხოვთ აირჩიოთ კანდიდატი!";
         this.response = response;
         await this.hideSpinner();
       
       } else if (this.input.voterId === undefined) {
         console.log('this.voterId === undefined')
 
-        let response = "You have to enter your voterId to cast a vote!";
+        let response = "გთხოვთ მიუთითოთ საიდენტიფიკაციო კოდი!";
         this.response = response;
         await this.hideSpinner();
 
@@ -109,9 +110,7 @@ export default {
           await this.hideSpinner();
         } 
         else {
-          let response = `Successfully recorded vote for ${this.picked} party 
-            for voter with voterId ${apiResponse.data.voterId}. Thanks for 
-            doing your part and voting!`;
+          let response = `ხმის მიცემა წარმატებით განხორციელდა! თქვენ აირჩიეთ ${this.picked}. გამოყენებული საიდენტიფიკაციო კოდი: ${apiResponse.data.voterId}. მადლობა მონაწილეობისტვის!`;
 
           this.response = response;
 

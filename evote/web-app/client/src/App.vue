@@ -20,6 +20,11 @@ export default {
 </script>
 
 <style>
+body{
+  background-image: url('assets/pic3.png');
+  background-size: 100%;
+
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
