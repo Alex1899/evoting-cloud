@@ -1,0 +1,9 @@
+{
+  "connection_file": "ibpConnection.json",
+  "appAdmin": "app-admin",
+  "appAdminSecret": "appadminpw",
+  "orgMSPID": "votermsp",
+  "caName": "https://184.173.5.55:32663",
+  "userName": "V1",
+  "gatewayDiscovery": { "enabled": true, "asLocalhost": false }
+}
