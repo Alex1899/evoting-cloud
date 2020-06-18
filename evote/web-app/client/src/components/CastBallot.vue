@@ -79,7 +79,7 @@ export default {
       if (this.picked === null ) {
         console.log('this.picked === null')
 
-        let response = "გტხოვთ აირჩიოთ კანდიდატი!";
+        let response = "გთხოვთ აირჩიოთ კანდიდატი!";
         this.response = response;
         await this.hideSpinner();
       

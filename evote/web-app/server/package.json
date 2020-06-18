@@ -17,6 +17,7 @@
     "fabric-client": "^1.4.3",
     "fabric-network": "~1.4.2",
     "morgan": "^1.9.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "short-unique-id": "^3.0.3"
   }
 }

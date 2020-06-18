@@ -1,8 +1,8 @@
 <template>
   <div class="posts">
-    <h1>Get the Current Poll Standings</h1>
+    <h1>არჩევნები შედეგები</h1>
 
-    <button v-on:click="getCurrentStanding()">Check Poll</button>
+    <button v-on:click="getCurrentStanding()">შემოწმება</button>
 
     <br>
     <span v-if="response">

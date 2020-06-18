@@ -44,7 +44,7 @@ async function queryAll() {
     await gateway.connect(connectionProfile, { wallet, identity: peerIdentity, discovery: config.gatewayDiscovery });
 
     //connect to our channel that has been created on IBM Blockchain Platform
-    const network = await gateway.getNetwork('mychannel');
+    const network = await gateway.getNetwork('newelection');
 
     //connect to our insurance contract that has been installed / instantiated on IBM Blockchain Platform
     const contract = await network.getContract('voteChainDemo'); 
